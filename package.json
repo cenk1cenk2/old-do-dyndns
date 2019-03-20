@@ -15,10 +15,12 @@
   },
   "pkg": {
     "scripts": "*.js",
-    "assets": ["*.json"],
-        "targets": [
-          "node10-linux-x64"
-        ]
+    "assets": [
+      "*.json"
+    ],
+    "targets": [
+      "node10-linux-x64"
+    ]
   },
   "bin": "dyndns.js",
   "devDependencies": {}
