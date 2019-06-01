@@ -1,6 +1,7 @@
 # Package specific ignores
-dyndns.db
-
+dyndns*.db*
+yarn*
+dyndns*.json*
 # Logs
 logs
 *.log

@@ -1,27 +1,27 @@
 {
   "name": "dyndns",
-  "version": "1.0.0",
+  "version": "1.20",
   "description": "Auto update Dynamic DNS Service for Digital Ocean.",
   "main": "dyndns.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
     "build": "babel --presets es2015 -d lib/ src"
   },
-  "author": "",
+  "author": "Cenk Kılıç",
   "license": "ISC",
   "dependencies": {
+    "moment": "^2.24.0",
     "request": "^2.88.0",
-    "sqlite3": "^4.0.6"
-  },
-  "pkg": {
-    "scripts": "*.js",
-    "assets": [
-      "*.json"
-    ],
-    "targets": [
-      "node10-linux-x64"
-    ]
+    "sqlite3": "^4.0.6",
+    "yargs": "^13.2.4"
   },
   "bin": "dyndns.js",
-  "devDependencies": {}
+  "pkg": {
+    "scripts": "*.js",
+    "assets": [],
+    "targets": [
+      "node12-linux-x64",
+      "node12-windows-x64"
+    ]
+  }
 }
