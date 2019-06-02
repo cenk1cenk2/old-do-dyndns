@@ -56,7 +56,6 @@ const args = require('yargs')
 
 const fs = require('fs')
 const request = require('request')
-const sqlite3 = require('sqlite3')
 const path = require('path')
 const moment = require('moment')
 // database if enabled
@@ -129,35 +128,18 @@ async function main () {
 
   console.log('Checking whether current IP matches domain IP.')
   var lastknownip
-  var db
   if (!args.memory) {
-    // Connect to the database
-    db = new sqlite3.Database(getExternalFile('./dyndns.db'), (err) => {
-      if (!err) {
-        console.log('Connected to the database.')
-      } else {
-        console.error(err.message)
-        process.exit(10)
-      }
-    })
-    // Init table if it does not exists
-    db.run('CREATE TABLE if not exists data(key text PRIMARY KEY, value text)')
-
+    // Init memory file if does not exists
+    if (!fs.existsSync(getExternalFile('dyndns.db'))) {
+      fs.writeFileSync(getExternalFile('dyndns.db'), '', { flag: 'wx' })
+    }
     // Get last known ip address of the machine
-    lastknownip = await new Promise((resolve) => {
-      db.each('SELECT value FROM data WHERE key="lastknownip"', function (err, row) {
-        if (!err) {
-          console.log(`Last known IP address is ${row.value}`)
-          resolve(row.value)
-        } else {
-          db.run('INSERT INTO "data" VALUES ("lastknownip","0") ON CONFLICT(key) DO UPDATE SET value=excluded.value;')
-          resolve('Last known IP address is not avaliable. Initiating database tables.')
-        }
-      })
-    })
+    lastknownip = fs.readFileSync(getExternalFile('dyndns.db'), { encoding: 'utf-8' })
   } else {
-    lastknownip = typeof memory !== 'undefined' ? memory : ''
+    lastknownip = memory === '' ? memory : ''
   }
+
+  console.log(`Last known IP address is ${lastknownip}`)
 
   // Get current ip address of the machine
   let currentip = await resolvedata({
@@ -170,14 +152,15 @@ async function main () {
     console.log(`Current IP address is ${data.ip}`)
     // update last known ip address database entry
     if (!args.memory) {
-      db.run(`INSERT INTO "data" VALUES ("lastknownip","${data.ip}") ON CONFLICT(key) DO UPDATE SET value=excluded.value;`)
+      fs.writeFileSync(getExternalFile('dyndns.db'), data.ip, { flag: 'w' })
     } else {
       memory = data.ip
     }
     return (data.ip)
   }).catch((err) => {
     // do nothing
-    console.log(err)
+    console.log('IKAM HEEEEEEEEEEEEEEEEEEEER')
+    // console.log(err)
   })
 
   // compare last known and current ip addresses
@@ -243,12 +226,7 @@ async function main () {
       console.log('IP Address is the same with last known IP doing no further action.')
     }
   } else {
-    console.log('IP Address has not been changed since last query.')
-  }
-
-  // Close the sqlitedb connection.
-  if (!args.memory) {
-    db.close()
+    console.log('Can not reach DNS records for Digital Ocean! Please check your configuration.')
   }
 }
 
@@ -260,7 +238,7 @@ async function resolvedata (options) {
         body = JSON.parse(body)
         resolve(body)
       } else {
-        reject('Can not get data. API is not responding.')
+        reject(new Error('Can not get data. API is not responding.'))
       }
     })
   })
