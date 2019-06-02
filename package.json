@@ -18,10 +18,11 @@
   "bin": "dyndns.js",
   "pkg": {
     "scripts": "*.js",
-    "assets": [],
+    "assets": ["./node_modules"],
     "targets": [
       "node12-linux-x64",
-      "node12-windows-x64"
+      "node12-windows-x64",
+      "node12-macos-x64"
     ]
   }
 }
