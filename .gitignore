@@ -2,6 +2,8 @@
 dyndns*.db*
 yarn*
 dyndns*.json*
+dist/
+
 # Logs
 logs
 *.log
