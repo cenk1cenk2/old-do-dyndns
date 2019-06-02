@@ -10,7 +10,7 @@ version:      | v1.20, 20190602
 Update the domain records that are redirected and managed by Digital Ocean name servers using the API automatically. The script will periodically or once check the IP address of the running server and if it differs from the domain records in Digital Ocean it will update it using the Digital Ocean API.
 
 ## Compiled Version
-You can find the compiled version in the [releases](https://github.com/cenk1cenk2/do-dyndns/releases/latest). It is compiled with [zeit/pkg](https://github.com/zeit/pkg). The script is both compiled for Windows, Linux and Macintosh platforms since it is a platform-independent simple script.
+You can find the compiled version in the [releases](https://github.com/cenk1cenk2/do-dyndns/releases/latest). It is compiled with [zeit/pkg](https://github.com/zeit/pkg). The script is both compiled for Windows, Linux platforms since it is a platform-independent simple script. I didn't had the chance to compile for MacOS machine, taking in hand that some libraries are platform specific, since I dont own one but it will work regardless.
 
 ## Setup:
 ## Fast Setup
