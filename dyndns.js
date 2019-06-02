@@ -4,12 +4,12 @@
  * File Created: 20190127
  * Author: Cenk Kılıç (cenk@kilic.dev)
  * -------------------------
- * Last Modified: 20190601
+ * Last Modified: 20190602
  * Modified By: Cenk Kılıç (cenk@kilic.dev>)
  * Changelog:----------------
  * Date          By      Ver      Comments
  * -----------   ----    ----     ---------------------------------------------------------
- * 20190601      CK      v1.20   Optimized for public release.
+ * 20190602      CK      v1.20   Optimized for public release.
  * 20190219      CK      v1.10   Fully functioning.
  * 20190124      CK      v1.00   Initial Version.
  */
@@ -18,7 +18,7 @@
 console.log(`     +-+-+-+-+-+-+-+-+-+-+-+-+
      |d|o|-|d|y|n|d|n|s| v${require('./package.json').version}
      +-+-+-+-+-+-+-+-+-+-+-+-+`)
-console.log('----------------------------------------')
+console.log('-----------------------------------')
 
 // parse command line arguments
 const args = require('yargs')
@@ -109,7 +109,7 @@ function getExternalFile (relPath) {
 
 function initdatabase (databaseURL) {
   // default database
-  let buffer = JSON.stringify({ 'domainname': 'STR_DOMAINNAME', 'subdomainname': 'STR_SUBDOMMAINNAME', 'authtoken': 'STR_DOMAINNAME', 'repeat': 'INT_INSECONDS' })
+  let buffer = JSON.stringify({ 'domainname': 'STR_DOMAINNAME', 'subdomainname': 'STR_SUBDOMMAINNAME', 'authtoken': 'STR_DOMAINNAME', 'repeat': 36000 })
   if (!fs.existsSync(databaseURL)) {
     fs.writeFileSync(databaseURL, buffer, { flag: 'wx' })
     console.error(`Database not found initating.`)
