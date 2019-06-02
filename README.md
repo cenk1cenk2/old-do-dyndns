@@ -29,7 +29,7 @@ If you want to run with a saved file without any command line arguments, in the 
 ```
 
 ## Run from Command Line
-**If you want to run without creating any additional files at the $PWD you will have to enable both modes, making it not use a JSON file as database and SQLite file as memory. But you can enable them independently as well.**
+**If you want to run without creating any additional files at the $PWD you will have to enable both modes, making it not use a JSON file as database and text file as memory. But you can enable them independently as well.**
 ### Arguments Needed
 If you want to use it without creating any database you must use all -\[-a\]uth-token, -\[-s\]ubdomain, -\[-d\]omain flags combined with either a -\[-r\]epeat interval to repeat in given seconds or -\[-o\]nce if you want to run the script once. An example can be found in -\[-h\]elp option.
 *Example:* `dyndns -a TOKENSTRING -s www -d mydomain.mock -r 36000` to repeat or `dyndns -a TOKENSTRING -s www -d mydomain.mock -o` to run once.
@@ -62,7 +62,7 @@ Options:
   -a, --auth-token  Asks the user for prompt before taking action.              
   -s, --subdomain   Asks the user for prompt before taking action.              
   -d, --domain      Asks the user for prompt before taking action.              
-  -m, --memory      Will disable creating SQLITE database in $PWD which is      
+  -m, --memory      Will disable creating text database in $PWD which is      
                     intended reduce the API queries and run from program memory 
                     instead.                                           [boolean]
   -h, --help        Show help                                          [boolean]

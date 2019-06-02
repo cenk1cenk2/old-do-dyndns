@@ -44,7 +44,7 @@ const args = require('yargs')
   .describe('d', 'Asks the user for prompt before taking action.')
   .boolean('m')
   .alias('m', 'memory')
-  .describe('m', 'Will disable creating SQLITE database in $PWD which is intended reduce the API queries and run from program memory instead.')
+  .describe('m', 'Will disable creating memory database in $PWD which is intended reduce the API queries and run from program memory instead.')
   .example('$0', 'Run with the default values in the database. Database file will be created and shall be edited with auth-token, subdomain and domain name to function.')
   .example('$0 -a AUTH_TOKEN -s MYSUBDOMAIN -d MYDOMAIN.MOCK -r 36000', 'If all the parameters are defined it will run for given details with repeat time of one hour.')
   .example('$0 -a AUTH_TOKEN -s MYSUBDOMAIN -d MYDOMAIN.MOCK -o', 'If all the parameters are defined it will run for given details once.')
@@ -93,7 +93,7 @@ if (args.once) {
 }
 // define memory for the argument
 if (args.memory) {
-  console.log('Running in memory mode will note create a SQLITE database at $PWD.')
+  console.log('Running in memory mode will note create a memory database at $PWD.')
   var memory
 }
 
